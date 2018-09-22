@@ -2,5 +2,8 @@
 firebase.json
 .firebaserc
 
-//Project
+// Project
 dist/
+
+// Server
+functions/node_modules

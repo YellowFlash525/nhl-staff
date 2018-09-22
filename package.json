@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "fb:open": "firebase open histing:site",
+    "global:install": "npm install && cd functions && npm install",
+    "fb:open": "firebase open hosting:site",
     "fb:deploy": "firebase deploy"
   },
   "repository": {
