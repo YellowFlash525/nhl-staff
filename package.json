@@ -1,0 +1,25 @@
+{
+  "name": "nba-staff",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fb:open": "firebase open histing:site",
+    "fb:deploy": "firebase deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YellowFlash525/nba-staff.git"
+  },
+  "keywords": [
+    "UAM",
+    "NBA",
+    "MGR"
+  ],
+  "author": "Kamil Wójcik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YellowFlash525/nba-staff/issues"
+  },
+  "homepage": "https://github.com/YellowFlash525/nba-staff#readme"
+}

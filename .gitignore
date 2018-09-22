@@ -1,0 +1,6 @@
+// Firebase
+firebase.json
+.firebaserc
+
+//Project
+dist/
