@@ -7,35 +7,51 @@
         <div class="col col-2">Team</div>
         <div class="col col-3">W</div>
         <div class="col col-4">L</div>
+        <div class="col col-4">OT</div>
         <div class="col col-4">Streak</div>
       </li>
-      <!-- <p>{{ recordsEast }}</p>
-      <p>{{ recordsWest }}</p> -->
-      <li v-for="recordEast in recordsEast" class="table-row">
+      <li v-for="recordEast in recordsEast" :key="recordEast.team.id" class="table-row">
         <div class="col col-1" data-label="Rank">{{ recordEast.conferenceRank }}</div>
         <div class="col col-2" data-label="Team">{{ recordEast.team.name }}</div>
         <div class="col col-3" data-label="W">{{ recordEast.leagueRecord.wins }}</div>
         <div class="col col-4" data-label="L">{{ recordEast.leagueRecord.losses }}</div>
+        <div class="col col-4" data-label="OT">{{ recordEast.leagueRecord.ot }}</div>
         <div class="col col-4" data-label="Streak">{{ recordEast.streak.streakCode }}</div>
       </li>
-      <li v-for="recordWest in recordsWest" class="table-row">
+      <li v-for="recordWest in recordsWest" :key="recordWest.team.id" class="table-row">
         <div class="col col-1" data-label="Rank">{{ recordWest.conferenceRank }}</div>
         <div class="col col-2" data-label="Team">{{ recordWest.team.name }}</div>
         <div class="col col-3" data-label="W">{{ recordWest.leagueRecord.wins }}</div>
         <div class="col col-4" data-label="L">{{ recordWest.leagueRecord.losses }}</div>
+        <div class="col col-4" data-label="OT">{{ recordWest.leagueRecord.ot }}</div>
         <div class="col col-4" data-label="Streak">{{ recordWest.streak.streakCode }}</div>
       </li>
+      <!-- <p>{{ orderedUsers }}</p> -->
     </ul>
   </div>
 </template>
 
 <script>
+import { _ } from 'lodash';
+
 export default {
   name: 'Standings',
+  data: () => {
+    return {
+      records: Array,
+    };
+  },
   props: {
     side: String,
     recordsEast: Array,
     recordsWest: Array,
+  },
+  computed: {
+    orderedUsers: () => {
+      this.records = this.side;
+      console.log(this.records);
+      return _.orderBy(this.records, 'conferenceRank');
+    },
   },
 };
 </script>
