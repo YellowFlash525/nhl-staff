@@ -1,14 +1,60 @@
 <template>
-  <div class="playerPage">
-    <h1>This is an about player {{ $route.params.id }}</h1>
-    <div class="playerinfo" v-if="is_data_fetched">
-      <p>{{ playerInfo[0].fullName }}</p>
-      <p>{{ playerInfo[0].primaryNumber }}</p>
-      <p>{{ playerInfo[0].birthDate }}</p>
-      <p>{{ playerInfo[0].birthCity }}</p>
-      <p>{{ playerInfo[0].birthCountry }}</p>
-      <p>{{ playerInfo[0].height }}</p>
-      <p>{{ playerInfo[0].rookie }}</p>
+  <div class="player">
+    <div class="player_info" v-if="is_playerInfo_fetched">
+      <div>
+        <p>Full Name</p>
+        <p>{{ playerInfo[0].fullName }}</p>
+      </div>
+      <div>
+        <p>Primary Number</p>
+        <p>{{ playerInfo[0].primaryNumber }}</p>
+      </div>
+      <div>
+        <p>Position</p>
+        <p>{{ playerInfo[0].primaryPosition.name }}</p>
+      </div>
+      <div>
+        <p>Birth Date</p>
+        <p>{{ playerInfo[0].birthDate }}</p>
+      </div>
+      <div>
+        <p>City</p>
+        <p>{{ playerInfo[0].birthCity }}</p>
+      </div>
+      <div>
+        <p>Country</p>
+        <p>{{ playerInfo[0].birthCountry }}</p>
+      </div>
+      <div>
+        <p>Height</p>
+        <p>{{ playerInfo[0].height }}</p>
+      </div>
+      <div>
+        <p>Rookie</p>
+        <p>{{ playerInfo[0].rookie }}</p>
+      </div>
+    </div>
+    <div class="player_stats">
+      <div class="player_stats--field" v-if="field_player && is_playerStat_fetched">
+        <p>Zdobyte gole {{ playerStats.goals }}</p>
+        <p>Liczba assyst {{ playerStats.assists }}</p>
+        <p>Punkty z G i A {{ playerStats.points }}</p>
+        <p>Oddane strzały {{ playerStats.shots }}</p>
+        <p>Strzały na mecz {{ playerStats.shotPct }}</p>
+        <p>Liczba karnych minut {{ playerStats.pim }}</p>
+        <p>Gole wygrywające gre {{ playerStats.gameWinningGoals }}</p>
+        <p>Czas na lodzie {{ playerStats.timeOnIce }}</p>
+        <p>Czas na lodzie na mecz {{ playerStats.timeOnIcePerGame }}</p>
+      </div>
+      <div class="player_stats--goalkeaper" v-if="goalkeaper && is_playerStat_fetched">
+        <p>Wpuszczone gole {{ playerStats.goalsAgainst }}</p>
+        <p>Śrenia goli wpuszczonych na mecz {{ playerStats.goalAgainstAverage }}</p>
+        <p>Strzały na bramke {{ playerStats.shotsAgainst }}</p>
+        <p>Ochronione bramki {{ playerStats.saves }}</p>
+        <p>Stop opponent from scorring whole game {{ playerStats.shutouts }}</p>
+        <p>Czas na lodzie {{ playerStats.timeOnIce }}</p>
+        <p>Czas na lodzie na mecz {{ playerStats.timeOnIcePerGame }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -19,17 +65,57 @@ export default {
   data: () => {
     return {
       playerInfo: [],
-      is_data_fetched: false,
+      playerStats: [],
+      is_playerInfo_fetched: false,
+      is_playerStat_fetched: false,
+      field_player: false,
+      goalkeaper: false,
     };
   },
   created() {
     this.$http.get(`https://statsapi.web.nhl.com/api/v1/people/${this.$route.params.id}`).then((response) => {
       this.playerInfo = response.data.people;
-      this.is_data_fetched = true;
+
+      if (this.playerInfo[0].primaryPosition.name === 'Goalie') {
+        this.goalkeaper = true;
+      } else {
+        this.field_player = true;
+      }
+
+      this.is_playerInfo_fetched = true;
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    this.$http.get(`https://statsapi.web.nhl.com/api/v1/people/${this.$route.params.id}/stats?stats=statsSingleSeason`).then((response) => {
+      this.playerStats = response.data.stats[0].splits[0].stat;
+      this.is_playerStat_fetched = true;
     }).catch((error) => {
       console.error(error);
     });
   },
-  // https://statsapi.web.nhl.com/api/v1/people/ID/stats - to be done stats player
 };
 </script>
+
+<style scoped lang="scss">
+.player {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+  width: 100%;
+
+  &_info {
+    div {
+      p {
+        font-size: 15px;
+        margin: 0 5px;
+
+        &:first-of-type {
+          font-size: 11px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+</style>
