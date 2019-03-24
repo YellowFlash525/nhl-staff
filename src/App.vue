@@ -31,7 +31,6 @@ body {
 
 .header {
   padding-top: .5em;
-  padding-bottom: .5em;
   background-color: #f4f4f4;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
@@ -40,6 +39,15 @@ ul {
   margin: 0;
   padding: 0;
   list-style: none;
+
+  a {
+    border-bottom: 2px solid #f4f4f4;
+
+    &:hover,
+    &.router-link-exact-active {
+      border-bottom: 2px solid blue;
+    }
+  }
 }
 
 .main-nav .router {

@@ -1,42 +1,22 @@
 <template>
   <div class="conferences">
-    <h1> {{ side }} Conference</h1>
     <div class="teams">
-      <div v-for="recordEast in recordsEast" :key="recordEast.team.id" class="teams_item">
-        <h3 class="teams_rank">#{{ recordEast.conferenceRank }}</h3>
-        <div class="teams_name">{{ recordEast.team.name }}</div>
-        <p class="teams_streak">{{ recordEast.streak.streakCode }}</p>
+      <div v-for="record in records" :key="record.team.id" class="teams_item">
+        <h3 class="teams_rank">#{{ record.conferenceRank }}</h3>
+        <div class="teams_name">{{ record.team.name }}</div>
+        <p class="teams_streak">{{ record.streak.streakCode }}</p>
         <ul class="teams_records">
             <li class="teams_wins">
               <p>W</p>
-              <p>{{ recordEast.leagueRecord.wins }}</p>
+              <p>{{ record.leagueRecord.wins }}</p>
             </li>
             <li class="teams_losess">
               <p>L</p>
-              <p>{{ recordEast.leagueRecord.losses }}</p>
+              <p>{{ record.leagueRecord.losses }}</p>
             </li>
             <li class="teams_overtime">
               <p>OT</p>
-              <p>{{ recordEast.leagueRecord.ot }}</p>
-            </li>
-        </ul>
-      </div>
-      <div v-for="recordWest in recordsWest" :key="recordWest.team.id" class="teams_item">
-        <h3 class="teams_rank">#{{ recordWest.conferenceRank }}</h3>
-        <div class="teams_name">{{ recordWest.team.name }}</div>
-        <p class="teams_streak">{{ recordWest.streak.streakCode }}</p>
-        <ul class="teams_records">
-            <li class="teams_wins">
-              <p>W</p>
-              <p>{{ recordWest.leagueRecord.wins }}</p>
-            </li>
-            <li class="teams_losess">
-              <p>L</p>
-              <p>{{ recordWest.leagueRecord.losses }}</p>
-            </li>
-            <li class="teams_overtime">
-              <p>OT</p>
-              <p>{{ recordWest.leagueRecord.ot }}</p>
+              <p>{{ record.leagueRecord.ot }}</p>
             </li>
         </ul>
       </div>
@@ -45,32 +25,18 @@
 </template>
 
 <script>
-import { _ } from 'lodash';
+// import { _ } from 'lodash';
 
 export default {
-  name: 'Standings',
-  data: () => {
-    return {
-      records: Array,
-    };
-  },
   props: {
     side: String,
-    recordsEast: Array,
-    recordsWest: Array,
-  },
-  computed: {
-    orderedUsers: () => {
-      this.records = this.side;
-      console.log(this.records);
-      return _.orderBy(this.records, 'conferenceRank');
-    },
+    records: Array,
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss" scoped>
 * {
   box-sizing: border-box;
 }
@@ -105,6 +71,7 @@ export default {
     background: #EEF0F3;
     border-top: 3px solid #EEF0F3;
     transition: border-color 0.3s;
+    border-radius: 5px;
 
     &:hover {
       border-color: #3e62e0;

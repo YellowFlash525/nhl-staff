@@ -10,14 +10,14 @@
     </div>
     <div class="wrapper">
       <div class="team_roster">
-        <h1>Roster</h1>
+        <h1>Players</h1>
         <div class="roster_wrapper">
           <div class="roster_box" v-for="player in players" :key="player.person.id">
             <div class="container">
               <div class="player">
                 <router-link class="roster" v-bind:to="`players/${player.person.id}`">
-                  <p>{{ player.person.fullName }}</p>
-                  <p>{{ player.jerseyNumber }}</p>
+                  <p class="player_number">#{{ player.jerseyNumber }}</p>
+                  <p class="player_name">{{ player.person.fullName }}</p>
                 </router-link>
               </div>
             </div>
@@ -72,25 +72,77 @@ export default {
 
   .team_list {
     width: 30%;
+    height: 900px;
 
     h1 {
-      margin-top: 0;
+      width: 85%;
+      margin: 0 auto 15px;
+      padding: 0 0 15px 0;
+      border-bottom: 2px solid #EEF0F3;
+    }
+
+    ul {
+      width: 100%;
+      height: 60%;
+      overflow: overlay;
+
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 2px;
+        background-color: #F5F5F5;
+      }
+
+      &::-webkit-scrollbar {
+        width: 12px;
+        background-color: #F5F5F5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #EEF0F3;
+      }
+    }
+
+    li {
+      display: inline-block;
+      width: 85%;
+      margin-bottom: 10px;
+
+      p {
+        background: #EEF0F3;
+        padding: 20px 40px;
+        width: 100%;
+        cursor: pointer;
+        border-bottom: 2px solid #EEF0F3;
+        margin: 0;
+
+        &:hover {
+          border-bottom: 2px solid blue;
+        }
+      }
     }
   }
 
   .wrapper {
     width: 70%;
+    margin-left: 15px;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+    }
   }
 
   .team_roster {
     h1 {
-      width: 60%;
       text-align: left;
+      width: 45%;
       margin: 0 0 0 10px;
-      background: #EEF0F3;
+      padding: 0 0 15px 0;
+      border-bottom: 2px solid #EEF0F3;
     }
   }
-  
+
   .roster_wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -110,7 +162,7 @@ export default {
 
     &:hover {
       transform: scale(1);
-      box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+      box-shadow: 0 2px 0 rgba(blue,0.8);
     }
 
     .container {
@@ -119,6 +171,16 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .roster {
+      text-decoration: none;
+      color: black;
+    }
+
+    .player_number {
+      font-size: 36px;
+      margin: 16px 0;
     }
   }
 
@@ -137,6 +199,7 @@ export default {
     }
 
     .team_roster h1 {
+      width: 85%;
       margin: 0 auto;
       text-align: center;
     }
@@ -145,6 +208,16 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+    }
+  }
+
+  @media (min-width: 769px ) and (max-width: 992px) {
+    .team_list {
+      width: 40%;
+    }
+
+    .wrapper {
+      width: 60%;
     }
   }
 </style>

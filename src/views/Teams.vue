@@ -7,7 +7,9 @@
             <p>{{ team.name }}</p>
           </div>
           <div class="team_back_info">
-            <p>Basic Data</p>
+            <p>{{ team.division.name }}</p>
+            <p>{{ team.locationName }}</p>
+            <p>{{ team.firstYearOfPlay }}</p>
           </div>
         </div>
       </router-link>
@@ -72,8 +74,13 @@ export default {
 
   .team_back_info {
     display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    
+    p {
+      margin: 0;
+    }
   }
 }
 

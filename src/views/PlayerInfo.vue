@@ -36,24 +36,24 @@
     </div>
     <div class="player_stats">
       <div class="player_stats--field" v-if="field_player && is_playerStat_fetched">
-        <p>Zdobyte gole {{ playerStats.goals }}</p>
-        <p>Liczba assyst {{ playerStats.assists }}</p>
-        <p>Punkty z G i A {{ playerStats.points }}</p>
-        <p>Oddane strzały {{ playerStats.shots }}</p>
-        <p>Strzały na mecz {{ playerStats.shotPct }}</p>
-        <p>Liczba karnych minut {{ playerStats.pim }}</p>
-        <p>Gole wygrywające gre {{ playerStats.gameWinningGoals }}</p>
-        <p>Czas na lodzie {{ playerStats.timeOnIce }}</p>
-        <p>Czas na lodzie na mecz {{ playerStats.timeOnIcePerGame }}</p>
+        <p>Goals {{ playerStats.goals }}</p>
+        <p>Assists {{ playerStats.assists }}</p>
+        <p>Points {{ playerStats.points }}</p>
+        <p>Shots{{ playerStats.shots }}</p>
+        <p>ShotPCT(%) {{ playerStats.shotPct }}</p>
+        <p>PenaltyMin {{ playerStats.pim }}</p>
+        <p>GameWinningGoals {{ playerStats.gameWinningGoals }}</p>
+        <p>TimeOnIce {{ playerStats.timeOnIce }}</p>
+        <p>TimeOnIcePerGame {{ playerStats.timeOnIcePerGame }}</p>
       </div>
       <div class="player_stats--goalkeaper" v-if="goalkeaper && is_playerStat_fetched">
-        <p>Wpuszczone gole {{ playerStats.goalsAgainst }}</p>
-        <p>Śrenia goli wpuszczonych na mecz {{ playerStats.goalAgainstAverage }}</p>
-        <p>Strzały na bramke {{ playerStats.shotsAgainst }}</p>
-        <p>Ochronione bramki {{ playerStats.saves }}</p>
-        <p>Stop opponent from scorring whole game {{ playerStats.shutouts }}</p>
-        <p>Czas na lodzie {{ playerStats.timeOnIce }}</p>
-        <p>Czas na lodzie na mecz {{ playerStats.timeOnIcePerGame }}</p>
+        <p>GoalsAgainst {{ playerStats.goalsAgainst }}</p>
+        <p>GoalsAgainstAvg {{ playerStats.goalAgainstAverage }}</p>
+        <p>ShotsAgainst {{ playerStats.shotsAgainst }}</p>
+        <p>Saves {{ playerStats.saves }}</p>
+        <p>ShutOuts {{ playerStats.shutouts }}</p>
+        <p>TimeOnIce {{ playerStats.timeOnIce }}</p>
+        <p>TimeOnIcePerGAme {{ playerStats.timeOnIcePerGame }}</p>
       </div>
     </div>
   </div>
