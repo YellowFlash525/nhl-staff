@@ -72,9 +72,6 @@
             <div class="container">
               <div class="player">
                 <router-link class="roster" v-bind:to="`players/${player.person.id}`">
-                  <div class="player_foto">
-                    <img src="">
-                  </div>
                   <p class="player_number">#{{ player.jerseyNumber }}</p>
                   <p>{{ player.person.fullName }}</p>
                 </router-link>
