@@ -6,60 +6,107 @@
       </div>
       <div class="player_wrapper">
         <div class="player_info--detail">
-          <h1>{{ playerInfo[0].fullName }}</h1>
           <h1>#{{ playerInfo[0].primaryNumber }}</h1>
-          <h1>{{ playerInfo[0].primaryPosition.name }}</h1>
+          <h1>{{ playerInfo[0].fullName }}</h1>
         </div>
         <div class="player_info--detail">
-          <p>Birth Date</p>
+          <p>Birth Date:</p>
           <p>{{ playerInfo[0].birthDate }}</p>
         </div>
         <div class="player_info--detail">
-          <p>Age</p>
+          <p>Age:</p>
           <p>{{ playerInfo[0].currentAge }}</p>
         </div>
         <div class="player_info--detail">
-          <p>City</p>
+          <p>City:</p>
           <p>{{ playerInfo[0].birthCity }}</p>
         </div>
         <div class="player_info--detail">
-          <p>Country</p>
+          <p>Country:</p>
           <p>{{ playerInfo[0].birthCountry }}</p>
         </div>
         <div class="player_info--detail">
-          <p>Weight</p>
+          <p>Weight:</p>
           <p>{{ playerInfo[0].weight }}</p>
         </div>
         <div class="player_info--detail">
-          <p>Height</p>
+          <p>Height:</p>
           <p>{{ playerInfo[0].height }}</p>
         </div>
         <div class="player_info--detail">
-          <p>Rookie</p>
+          <p>Rookie:</p>
           <p>{{ playerInfo[0].rookie }}</p>
         </div>
       </div>
     </div>
     <div class="player_stats">
-      <div class="player_stats--field" v-if="field_player && is_playerStat_fetched">
-        <p>Goals {{ playerStats.goals }}</p>
-        <p>Assists {{ playerStats.assists }}</p>
-        <p>Points {{ playerStats.points }}</p>
-        <p>Shots{{ playerStats.shots }}</p>
-        <p>ShotPCT(%) {{ playerStats.shotPct }}</p>
-        <p>PenaltyMin {{ playerStats.pim }}</p>
-        <p>GameWinningGoals {{ playerStats.gameWinningGoals }}</p>
-        <p>TimeOnIce {{ playerStats.timeOnIce }}</p>
-        <p>TimeOnIcePerGame {{ playerStats.timeOnIcePerGame }}</p>
-      </div>
       <div class="player_stats--goalkeaper" v-if="goalkeaper && is_playerStat_fetched">
-        <p>GoalsAgainst {{ playerStats.goalsAgainst }}</p>
-        <p>GoalsAgainstAvg {{ playerStats.goalAgainstAverage }}</p>
-        <p>ShotsAgainst {{ playerStats.shotsAgainst }}</p>
-        <p>Saves {{ playerStats.saves }}</p>
-        <p>ShutOuts {{ playerStats.shutouts }}</p>
-        <p>TimeOnIce {{ playerStats.timeOnIce }}</p>
-        <p>TimeOnIcePerGAme {{ playerStats.timeOnIcePerGame }}</p>
+        <div>
+          <p>GoalsAgainst</p>
+          <p>{{ playerStats.goalsAgainst }}</p>
+        </div>
+        <div>
+          <p>GoalsAgainstAvg</p>
+          <p>{{ playerStats.goalAgainstAverage }}</p>
+        </div>
+        <div>
+          <p>ShotsAgainst</p>
+          <p>{{ playerStats.shotsAgainst }}</p>
+        </div>
+        <div>
+          <p>Saves</p>
+          <p>{{ playerStats.saves }}</p>
+        </div>
+        <div>
+          <p>ShutOuts</p>
+          <p>{{ playerStats.shutouts }}</p>
+        </div>
+        <div>
+          <p>TimeOnIce</p>
+          <p>{{ playerStats.timeOnIce }}</p>
+        </div>
+        <div>
+          <p>TimeOnIcePerGAme</p>
+          <p>{{ playerStats.timeOnIcePerGame }}</p>
+        </div>
+      </div>
+      <div v-else class="player_stats--field">
+        <div>
+          <p>Goals</p>
+          <p>{{ playerStats.goals }}</p>
+        </div>
+        <div>
+          <p>Assists</p>
+          <p>{{ playerStats.assists }}</p>
+        </div>
+        <div>
+          <p>Points</p>
+          <p>{{ playerStats.points }}</p>
+        </div>
+        <div>
+          <p>Shots</p>
+          <p>{{ playerStats.shots }}</p>
+        </div>
+        <div>
+          <p>ShotPCT(%)</p>
+          <p>{{ playerStats.shotPct }}</p>
+        </div>
+        <div>
+          <p>PenaltyMin</p>
+          <p>{{ playerStats.pim }}</p>
+        </div>
+        <div>
+          <p>GameWinningGoals</p>
+          <p>{{ playerStats.gameWinningGoals }}</p>
+        </div>
+        <div>
+          <p>TimeOnIce</p>
+          <p>{{ playerStats.timeOnIce }}</p>
+        </div>
+        <div>
+          <p>TimeOnIcePerGame</p>
+          <p>{{ playerStats.timeOnIcePerGame }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -68,7 +115,7 @@
 <script>
 export default {
   name: 'playerinfo',
-  data: () => {
+  data() {
     return {
       playerInfo: [],
       playerStats: [],
@@ -81,7 +128,6 @@ export default {
   created() {
     this.$http.get(`https://statsapi.web.nhl.com/api/v1/people/${this.$route.params.id}`).then((response) => {
       this.playerInfo = response.data.people;
-      console.log(response.data.people);
 
       if (this.playerInfo[0].primaryPosition.name === 'Goalie') {
         this.goalkeaper = true;
@@ -106,11 +152,15 @@ export default {
 
 <style scoped lang="scss">
 .player {
-  width: 75%;
-  margin: 30px auto;
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
 
   &_info {
+    width: 80%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: #d3d3d3;
     border-radius: 3px;
     padding: 30px;
@@ -127,37 +177,38 @@ export default {
     }
 
     p {
-      margin: 0;
+      margin: 0 5px 0 0;
     }
 
     &--foto {
-      padding-right: 30px;
-
       img {
         border-radius: 50%;
-        width: 200px;
+        width: 150px;
       }
     }
 
     &--detail {
       display: flex;
-      align-items: baseline;
-      
-      p {
-        &:first-of-type {
-          width: 150px;
-          text-align: left;
-        }
-      }
+      align-items: center;
+      justify-content: center;
     }
   }
 
   &_stats--field,
   &_stats--goalkeaper {
     display: flex;
-    background: #EEF0F3;
-    margin-top: 20px;
+    margin-left: 20px;
     border-radius: 3px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    div {
+      width: 200px;
+      background: #f4f4f4;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border-bottom: 1px solid blue;
+    }
   }
 }
 </style>

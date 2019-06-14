@@ -1,8 +1,9 @@
 <template>
   <div class="teamPage">
     <div class="team_wrapper" v-if="is_data_fetched">
+      <h1 class="team_name">{{ teamInfo[0].name }}</h1>
       <div class="team_info">
-        <h1>{{ teamInfo[0].name }}</h1>
+        <h1>Team Info</h1>
         <p>Arena: {{ teamInfo[0].venue.name }}</p>
         <p>City: {{ teamInfo[0].venue.city }}</p>
         <p>Birth: {{ teamInfo[0].firstYearOfPlay }}</p>
@@ -65,29 +66,20 @@
       </div>
     </div>
     <div class="wrapper">
-      <div class="team_roster">
-        <h1>Players</h1>
-        <div class="roster_wrapper">
-          <div class="roster_box" v-for="player in teamPlayers" :key="player.person.id">
-            <div class="container">
-              <div class="player">
-                <router-link class="roster" v-bind:to="`players/${player.person.id}`">
-                  <p class="player_number">#{{ player.jerseyNumber }}</p>
-                  <p>{{ player.person.fullName }}</p>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Roster :roster="teamPlayers"/>
     </div>
   </div>
 </template>
 
 <script>
+import Roster from '@/components/Roster.vue';
+
 export default {
   name: 'teaminfo',
-  data: () => {
+  components: {
+    Roster,
+  },
+  data() {
     return {
       teamPlayers: [],
       teamInfo: [],
@@ -124,6 +116,11 @@ export default {
     margin: 40px 0;
   }
 
+  .team_name {
+    width: 85%;
+    margin: 0 auto 20px;
+  }
+
   .team_wrapper {
     width: 30%;
   }
@@ -150,58 +147,6 @@ export default {
     }
   }
 
-  .roster {
-    text-decoration: none;
-    color: #000;
-  }
-
-  .team_roster {
-    h1 {
-      text-align: left;
-      width: 45%;
-      margin: 0 0 0 10px;
-      padding: 0 0 15px 0;
-      border-bottom: 2px solid #EEF0F3;
-    }
-  }
-
-  .roster_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-
-    .player_number {
-      font-size: 36px;
-      margin: 16px 0;
-    }
-  }
-
-  .roster_box {
-    width: 200px;
-    height: 200px;
-    background: #EEF0F3;
-    border-radius: 3px;
-    position: relative;
-    overflow: hidden;
-    margin: 10px 5px;
-    box-shadow: 0;
-    transform: scale(0.95);
-    transition: box-shadow 0.5s, transform 0.5s;
-
-    &:hover {
-      transform: scale(1);
-      box-shadow: 0 2px 0 rgba(blue,0.8);
-    }
-
-    .container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
   .team_statistics {
     width: 85%;
     margin: 0 auto;
@@ -209,8 +154,8 @@ export default {
     h1 {
       text-align: left;
       width: 90%;
-      margin: 10px 0;
-      padding: 0 0 15px 0;
+      margin: 20px 0 10px;
+      padding: 0 0 15px;
       border-bottom: 2px solid #EEF0F3;
     }
 

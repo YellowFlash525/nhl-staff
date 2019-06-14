@@ -3,7 +3,7 @@
     <div class="header">
       <h1>NHL Staff</h1>
       <ul class="main-nav">
-        <li><router-link class="router" to="/">Home</router-link></li>
+        <li><router-link class="router" to="/">Standings</router-link></li>
         <li><router-link class="router" to="/players">Players</router-link></li>
         <li><router-link class="router" to="/teams">Teams</router-link></li>
       </ul>
@@ -22,7 +22,7 @@ body {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Comic Sans MS';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

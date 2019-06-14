@@ -19,7 +19,7 @@ export default {
   components: {
     Standings,
   },
-  data: () => {
+  data() {
     return {
       standings: [],
       teams: [],

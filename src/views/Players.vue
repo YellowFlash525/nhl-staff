@@ -9,29 +9,20 @@
       </ul>
     </div>
     <div class="wrapper">
-      <div class="team_roster">
-        <h1>Players</h1>
-        <div class="roster_wrapper">
-          <div class="roster_box" v-for="player in players" :key="player.person.id">
-            <div class="container">
-              <div class="player">
-                <router-link class="roster" v-bind:to="`players/${player.person.id}`">
-                  <p class="player_number">#{{ player.jerseyNumber }}</p>
-                  <p class="player_name">{{ player.person.fullName }}</p>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Roster :roster="players"/>
     </div>
   </div>
 </template>
 
 <script>
+import Roster from '@/components/Roster.vue';
+
 export default {
   name: 'playerinfo',
-  data: () => {
+  components: {
+    Roster,
+  },
+  data() {
     return {
       teams: [],
       players: [],
@@ -121,6 +112,10 @@ export default {
           border-bottom: 2px solid blue;
         }
       }
+    }
+
+    @media (max-width: 768px) {
+      height: 100%;
     }
   }
 
